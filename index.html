@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade 6 English • Unit 1: Traditional Games Assessment</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts Inter & Noto Sans Ethiopic for clear Amharic rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans Ethiopic', sans-serif;
+    }
+    .ethiopic-font {
+      font-family: 'Noto Sans Ethiopic', sans-serif;
+    }
+    /* Smooth transitions */
+    .btn-transition {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 py-3 sm:px-6 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-base sm:text-lg text-slate-800 leading-tight">Grade 6 English • Unit 1</h1>
+          <p class="text-xs text-slate-500 font-medium">Traditional Games: Vocabulary Mastery Assessment</p>
+        </div>
+      </div>
+
+      <!-- Narrator Controls & Audio Indicator -->
+      <div class="flex items-center space-x-2">
+        <button id="audio-toggle-btn" onclick="toggleSpeechMute()" title="Toggle Voice Narrator" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-2 transition">
+          <i id="audio-icon" class="fa-solid fa-volume-high text-emerald-600"></i>
+          <span class="hidden sm:inline" id="audio-status-label">Voice: British (Active)</span>
+        </button>
+        <button onclick="repeatCurrentPrompt()" title="Read aloud again" class="p-2 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition">
+          <i class="fa-solid fa-rotate-right text-xs"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col justify-center">
+
+    <!-- SCREEN 1: REGISTRATION & INTRODUCTION -->
+    <section id="registration-screen" class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200 overflow-hidden transition-all duration-300">
+      <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-cyan-800 p-6 sm:p-8 text-white relative">
+        <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md text-emerald-100 text-xs uppercase tracking-wider font-bold rounded-full mb-3">
+          Ministry Curriculum Standards
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Student Identity & Exam Portal</h2>
+        <p class="mt-2 text-emerald-100 text-sm max-w-2xl leading-relaxed">
+          Welcome to the Unit 1 Vocabulary Mastery Assessment. Complete all 26 exercises covering traditional Ethiopian games (Genna, Gebeta, Akukulu, and athletic heritage).
+        </p>
+      </div>
+
+      <form id="student-reg-form" onsubmit="handleStartQuiz(event)" class="p-6 sm:p-8 space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="student-name" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Full Name <span class="text-rose-500">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                <i class="fa-regular fa-user"></i>
+              </span>
+              <input type="text" id="student-name" required placeholder="e.g. Almaz Tadesse" 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition text-sm">
+            </div>
+          </div>
+
+          <div>
+            <label for="student-id" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Student ID / Roll No. <span class="text-rose-500">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                <i class="fa-regular fa-id-card"></i>
+              </span>
+              <input type="text" id="student-id" required placeholder="e.g. ETH-2026-089" 
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition text-sm">
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-amber-900 flex space-x-3">
+          <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 text-base flex-shrink-0"></i>
+          <div>
+            <strong class="font-semibold">Instructions & Rules:</strong>
+            <ul class="list-disc ml-4 mt-1 space-y-0.5 text-amber-800">
+              <li>Immediate Feedback: Answering locks in your choice and reveals the correct response.</li>
+              <li>Bilingual learning: Every single question includes detailed explanations in both English and Amharic (አማርኛ).</li>
+              <li>Official Teacher Submission: Results will be transmitted directly to <strong>mesayferedegn2@gmail.com</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/30 transform active:scale-95 transition flex items-center justify-center space-x-2 text-sm sm:text-base cursor-pointer">
+            <span>Start Assessment</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- SCREEN 2: ACTIVE QUIZ VIEW -->
+    <section id="quiz-screen" class="hidden flex-col space-y-4">
+      
+      <!-- Live Progress Bar & Info -->
+      <div class="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="w-full sm:w-2/3">
+          <div class="flex justify-between items-center text-xs font-semibold text-slate-600 mb-1.5">
+            <span id="progress-question-label">Question 1 of 26</span>
+            <span id="progress-percentage-label">4%</span>
+          </div>
+          <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+            <div id="progress-bar-fill" class="bg-emerald-600 h-2.5 rounded-full transition-all duration-300" style="width: 4%"></div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
+          <div class="text-right">
+            <span class="text-[11px] block text-slate-400 font-bold uppercase tracking-wider">Current Score</span>
+            <span class="text-base font-extrabold text-slate-800" id="live-score-display">0 / 26</span>
+          </div>
+          <div class="h-8 w-px bg-slate-200"></div>
+          <div class="text-right">
+            <span class="text-[11px] block text-slate-400 font-bold uppercase tracking-wider">Candidate</span>
+            <span class="text-xs font-semibold text-slate-700 truncate max-w-[120px] inline-block" id="candidate-badge-name">Student</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 p-5 sm:p-7 relative transition-all">
+        <!-- Question Category Badge -->
+        <div class="flex items-center justify-between mb-4">
+          <span id="part-tag" class="px-3 py-1 bg-teal-50 text-teal-700 border border-teal-200 text-xs font-bold rounded-lg uppercase tracking-wider">
+            PART I: VOCABULARY MATCHING
+          </span>
+          <span id="points-tag" class="text-xs font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-md">
+            1 Point
+          </span>
+        </div>
+
+        <!-- Question Prompt Text -->
+        <div class="mb-5">
+          <h3 id="question-text" class="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+            Match the term with its corresponding meaning.
+          </h3>
+          <p id="question-subtext" class="text-xs sm:text-sm text-slate-500 mt-1 italic">
+            Select the most suitable answer from the options below.
+          </p>
+        </div>
+
+        <!-- Dynamic Options Container -->
+        <div id="options-container" class="space-y-3 mb-6">
+          <!-- Filled dynamically by JavaScript -->
+        </div>
+
+        <!-- Instant Feedback & Bilingual Explanation Card (Initially Hidden) -->
+        <div id="explanation-container" class="hidden mt-6 border rounded-xl p-4 sm:p-5 transition-all animate-fadeIn">
+          <div class="flex items-center space-x-2.5 font-bold text-sm mb-2" id="feedback-header">
+            <span id="feedback-icon" class="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs"></span>
+            <span id="feedback-title" class="text-sm sm:text-base">Correct!</span>
+          </div>
+
+          <!-- Bilingual Detailed Explanation -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3 pt-3 border-t border-slate-200/60 text-xs sm:text-sm">
+            <div class="bg-slate-50 p-3 rounded-lg border border-slate-200/80">
+              <span class="font-bold text-slate-700 block mb-1 text-[11px] uppercase tracking-wider flex items-center">
+                <i class="fa-solid fa-earth-americas mr-1.5 text-slate-500"></i> English Explanation
+              </span>
+              <p id="explanation-en" class="text-slate-700 leading-relaxed font-normal"></p>
+            </div>
+            <div class="bg-emerald-50/60 p-3 rounded-lg border border-emerald-200/80">
+              <span class="font-bold text-emerald-800 block mb-1 text-[11px] uppercase tracking-wider ethiopic-font flex items-center">
+                <i class="fa-solid fa-language mr-1.5 text-emerald-600"></i> ማብራሪያ (በአማርኛ)
+              </span>
+              <p id="explanation-am" class="text-slate-800 leading-relaxed ethiopic-font font-normal"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons: Back, Skip, Next / Submit -->
+        <div class="mt-8 pt-5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <button id="prev-btn" onclick="goToPrevQuestion()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back</span>
+          </button>
+
+          <div class="flex items-center space-x-2 sm:space-x-3">
+            <button id="skip-btn" onclick="skipCurrentQuestion()" class="px-4 py-2.5 rounded-xl border border-amber-300 bg-amber-50/70 text-amber-800 hover:bg-amber-100 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition">
+              <span>Skip / Next</span>
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+
+            <button id="next-btn" onclick="goToNextQuestion()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm flex items-center space-x-2 shadow-md shadow-emerald-600/20 transition">
+              <span id="next-btn-text">Next Question</span>
+              <i class="fa-solid fa-arrow-right" id="next-btn-icon"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Question Grid / Jump Palette -->
+      <div class="bg-white rounded-xl p-4 border border-slate-200">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Quick Navigation Palette</span>
+          <span class="text-[11px] text-slate-400">Green = Answered | Gray = Pending</span>
+        </div>
+        <div id="palette-container" class="grid grid-cols-7 sm:grid-cols-13 gap-1.5">
+          <!-- 26 items dynamically rendered -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: RESULTS & TEACHER DASHBOARD -->
+    <section id="results-screen" class="hidden flex-col space-y-6 animate-fadeIn">
+      
+      <!-- Primary Score Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-emerald-800 to-teal-800 text-white p-6 sm:p-8 text-center relative">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 backdrop-blur-md mb-3 border border-white/20">
+            <i class="fa-solid fa-award text-3xl text-amber-300"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Assessment Completed</h2>
+          <p class="text-emerald-100 text-xs sm:text-sm mt-1">Official Result Certificate • Grade 6 English (Traditional Games)</p>
+        </div>
+
+        <div class="p-6 sm:p-8">
+          <!-- Summary Metrics -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center mb-8">
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Total Score</span>
+              <span id="res-score" class="text-2xl font-black text-slate-800">0 / 26</span>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Accuracy</span>
+              <span id="res-percentage" class="text-2xl font-black text-emerald-600">0%</span>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Status</span>
+              <span id="res-grade-status" class="text-xl font-black text-teal-700">Competent</span>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5">
+              <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Time Expended</span>
+              <span id="res-time-spent" class="text-2xl font-black text-slate-700">0m 0s</span>
+            </div>
+          </div>
+
+          <!-- Student Meta Details -->
+          <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 mb-6 text-sm grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div><strong class="text-slate-500 text-xs uppercase block">Student Name:</strong> <span id="res-student-name" class="font-bold text-slate-800"></span></div>
+            <div><strong class="text-slate-500 text-xs uppercase block">Student ID Number:</strong> <span id="res-student-id" class="font-bold text-slate-800"></span></div>
+            <div><strong class="text-slate-500 text-xs uppercase block">Date & Timestamp:</strong> <span id="res-timestamp" class="font-bold text-slate-800"></span></div>
+            <div><strong class="text-slate-500 text-xs uppercase block">Subject / Assessment:</strong> <span class="font-bold text-slate-800">Grade 6 English • Unit 1</span></div>
+          </div>
+
+          <!-- Teacher Notification / Email Action Area -->
+          <div class="bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-5 sm:p-6 mb-8 text-center space-y-4">
+            <div class="w-12 h-12 bg-emerald-600 text-white rounded-full flex items-center justify-center mx-auto shadow-md shadow-emerald-600/30">
+              <i class="fa-solid fa-paper-plane text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-emerald-900">Transmit Results to Teacher</h3>
+              <p class="text-xs sm:text-sm text-emerald-700 max-w-lg mx-auto mt-1">
+                Examiner notification requirement: Click below to dispatch your verified grade report to your instructor at <strong>mesayferedegn2@gmail.com</strong>.
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <a id="email-teacher-link" href="#" target="_blank" class="w-full sm:w-auto px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl shadow-lg shadow-emerald-700/20 text-sm flex items-center justify-center space-x-2 transition">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Send Score via Email (mesayferedegn2@gmail.com)</span>
+              </a>
+              <button onclick="copyScoreReportToClipboard()" class="w-full sm:w-auto px-5 py-3 bg-white border border-emerald-400 text-emerald-800 hover:bg-emerald-100 font-semibold rounded-xl text-sm flex items-center justify-center space-x-2 transition">
+                <i class="fa-regular fa-copy"></i>
+                <span id="copy-report-btn-text">Copy Full Score Report</span>
+              </button>
+            </div>
+            <div id="copy-confirmation" class="hidden text-xs text-emerald-800 font-bold mt-2">
+              <i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Report copied to clipboard! You can paste it into any mail or message app.
+            </div>
+          </div>
+
+          <!-- Teacher Dashboard: Item-by-Item Breakdown -->
+          <div class="border-t border-slate-200 pt-6">
+            <h4 class="font-extrabold text-base text-slate-800 mb-4 flex items-center justify-between">
+              <span>Item-by-Item Performance Log</span>
+              <span class="text-xs font-medium text-slate-500">26 Questions Detailed Review</span>
+            </h4>
+            <div id="answers-breakdown-list" class="space-y-3 max-h-96 overflow-y-auto pr-1">
+              <!-- Populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Restart Assessment Option -->
+          <div class="mt-8 pt-6 border-t border-slate-200 flex justify-center">
+            <button onclick="restartQuiz()" class="px-6 py-3 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl font-bold text-sm flex items-center space-x-2 transition">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>Retake Assessment</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-4 mt-auto">
+    <div class="max-w-5xl mx-auto px-4 text-center text-xs text-slate-500">
+      <p>Grade 6 English Instructional Assessment • Traditional Games Unit • Designed for Ethiopian Primary Education Standards</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT APPLICATION LOGIC -->
+  <script>
+    /* =========================================================================
+       DATA STORE: 26 ASSESSMENT ITEMS WITH BILINGUAL EXPLANATIONS & UNPATTERNED KEYS
+       ========================================================================= */
+    const QUIZ_DATA = [
+      /* PART I: VOCABULARY MATCHING (Items 1 to 5) */
+      {
+        id: 1,
+        part: "PART I: VOCABULARY MATCHING",
+        word: "Equipment",
+        type: "matching",
+        prompt: "Match the word 'Equipment' with its correct definition or synonym:",
+        options: [
+          { key: "A", text: "A competitor, rival, or opposing player in a match." },
+          { key: "B", text: "Dropping seeds or pebbles one by one into holes, as in Gebeta." },
+          { key: "C", text: "Difference, variation, diversity, or disparity among forms of play." },
+          { key: "D", text: "Tools, apparatus, gear, or implements required for an activity." },
+          { key: "E", text: "Secretly, quietly, and cautiously without being noticed." }
+        ],
+        correctKey: "D",
+        explanationEn: "Equipment refers to the set of tools, apparatus, clothing, or gear necessary for performing a particular game, sport, or activity (e.g., sticks and balls in Genna).",
+        explanationAm: "‘Equipment’ ማለት ለአንድ ጨዋታ ወይም እንቅስቃሴ የሚያስፈልጉ መሣሪያዎች፣ ቁሳቁሶች ወይም አልባሳት ማለት ነው (ለምሳሌ በገና ጨዋታ ላይ ዱላ እና ኳስ)።"
+      },
+      {
+        id: 2,
+        part: "PART I: VOCABULARY MATCHING",
+        word: "Variance",
+        type: "matching",
+        prompt: "Match the word 'Variance' with its correct definition or synonym:",
+        options: [
+          { key: "A", text: "Secretly, quietly, and cautiously without being noticed." },
+          { key: "B", text: "Tools, apparatus, gear, or implements required for an activity." },
+          { key: "C", text: "Difference, variation, diversity, or disparity among forms of play." },
+          { key: "D", text: "A competitor, rival, or opposing player in a match." },
+          { key: "E", text: "Dropping seeds or pebbles one by one into holes, as in Gebeta." }
+        ],
+        correctKey: "C",
+        explanationEn: "Variance indicates a difference, disparity, diversity, or degree of change between traditional variations of cultural games.",
+        explanationAm: "‘Variance’ ማለት ልዩነት፣ ልዩ ልዩ መልክ ወይም በአጨዋወት መካከል የሚታይ የልዩነት መጠን ማለት ነው።"
+      },
+      {
+        id: 3,
+        part: "PART I: VOCABULARY MATCHING",
+        word: "Opponent",
+        type: "matching",
+        prompt: "Match the word 'Opponent' with its correct definition or synonym:",
+        options: [
+          { key: "A", text: "A competitor, rival, or opposing player in a match." },
+          { key: "B", text: "Difference, variation, diversity, or disparity among forms of play." },
+          { key: "C", text: "Secretly, quietly, and cautiously without being noticed." },
+          { key: "D", text: "Dropping seeds or pebbles one by one into holes, as in Gebeta." },
+          { key: "E", text: "Tools, apparatus, gear, or implements required for an activity." }
+        ],
+        correctKey: "A",
+        explanationEn: "An opponent is someone who competes against another in a contest, sporting event, debate, or cultural game.",
+        explanationAm: "‘Opponent’ ማለት ተፎካካሪ፣ ተቃራኒ ቡድን ወይም በጨዋታ ውስጥ የሚገጥመን ተወዳዳሪ ማለት ነው።"
+      },
+      {
+        id: 4,
+        part: "PART I: VOCABULARY MATCHING",
+        word: "Stealthily",
+        type: "matching",
+        prompt: "Match the word 'Stealthily' with its correct definition or synonym:",
+        options: [
+          { key: "A", text: "Tools, apparatus, gear, or implements required for an activity." },
+          { key: "B", text: "A competitor, rival, or opposing player in a match." },
+          { key: "C", text: "Difference, variation, diversity, or disparity among forms of play." },
+          { key: "D", text: "Dropping seeds or pebbles one by one into holes, as in Gebeta." },
+          { key: "E", text: "Secretly, quietly, and cautiously without being noticed." }
+        ],
+        correctKey: "E",
+        explanationEn: "Stealthily is an adverb describing an action executed in a covert, extremely cautious, and quiet manner to avoid detection.",
+        explanationAm: "‘Stealthily’ ማለት በስውር፣ በድብቅ እና እንዳይታወቁ በጥንቃቄ መንቀሳቀስ ማለት ነው።"
+      },
+      {
+        id: 5,
+        part: "PART I: VOCABULARY MATCHING",
+        word: "Sowing",
+        type: "matching",
+        prompt: "Match the word 'Sowing' with its correct definition or synonym:",
+        options: [
+          { key: "A", text: "A competitor, rival, or opposing player in a match." },
+          { key: "B", text: "Dropping seeds or pebbles one by one into holes, as in Gebeta." },
+          { key: "C", text: "Tools, apparatus, gear, or implements required for an activity." },
+          { key: "D", text: "Difference, variation, diversity, or disparity among forms of play." },
+          { key: "E", text: "Secretly, quietly, and cautiously without being noticed." }
+        ],
+        correctKey: "B",
+        explanationEn: "In mancala and Ethiopian Gebeta games, 'sowing' is the technical term used for distributing seeds or pebbles sequentially into pit holes.",
+        explanationAm: "‘Sowing’ በገበጣ ጨዋታ ወቅት ጠጠሮችን ወይም ዘሮችን በየጉድጓዱ አንድ በአንድ ማከፋፈል ወይም መዝራት ማለት ነው።"
+      },
+
+      /* PART II: CONTEXTUAL FILL-IN-THE-BLANK (Items 6 to 11) */
+      {
+        id: 6,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "Craftsmen carefully carved the curved Genna playing stick using dense wood harvested from a sturdy local ____________________ tree.",
+        options: [
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "phasing out", text: "phasing out" },
+          { key: "decorate", text: "decorate" },
+          { key: "score", text: "score" },
+          { key: "bench", text: "bench" },
+          { key: "tie", text: "tie" }
+        ],
+        correctKey: "eucalyptus",
+        explanationEn: "'Eucalyptus' (ባህር ዛፍ) is a common local hardwood tree widely harvested across Ethiopian highlands for crafting curved traditional Genna sticks (ዱላ).",
+        explanationAm: "‘Eucalyptus’ (ባህር ዛፍ) ጠንካራ እንጨት በመሆኑ በሀገራችን የገና ጨዋታ ዱላዎችን ለመጥረብና ለማዘጋጀት በሰፊው ጥቅም ላይ ይውላል።"
+      },
+      {
+        id: 7,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "Elders in the community are actively teaching younger generations traditional outdoor pastimes so these ancient games avoid ____________________ over time.",
+        options: [
+          { key: "decorate", text: "decorate" },
+          { key: "phasing out", text: "phasing out" },
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "score", text: "score" },
+          { key: "tie", text: "tie" },
+          { key: "bench", text: "bench" }
+        ],
+        correctKey: "phasing out",
+        explanationEn: "'Phasing out' means gradually disappearing, declining, or stopping. Traditional teachings prevent indigenous games from becoming extinct.",
+        explanationAm: "‘Phasing out’ ማለት ቀስ በቀስ እየጠፋ ወይም እየተረሳ መሄድ ማለት ነው። ሽማግሌዎች ባህላዊ ጨዋታዎች እንዳይጠፉ ለወጣቶች ያስተምራሉ።"
+      },
+      {
+        id: 8,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "Before the festive tournament began, the village youth gathered bright ribbons and carved motifs to ____________________ the wooden goal markers.",
+        options: [
+          { key: "bench", text: "bench" },
+          { key: "score", text: "score" },
+          { key: "decorate", text: "decorate" },
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "phasing out", text: "phasing out" },
+          { key: "tie", text: "tie" }
+        ],
+        correctKey: "decorate",
+        explanationEn: "'Decorate' means to adorn, beautify, or ornament an object with festive embellishments before a celebration.",
+        explanationAm: "‘Decorate’ ማለት ማስጌጥ፣ ማሳመር ወይም በሪቦንና በጌጣጌጦች ማሸብረቅ ማለት ነው።"
+      },
+      {
+        id: 9,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "The agile forward managed to maneuver the leather ball across the open field and successfully ____________________ the decisive point.",
+        options: [
+          { key: "score", text: "score" },
+          { key: "tie", text: "tie" },
+          { key: "bench", text: "bench" },
+          { key: "decorate", text: "decorate" },
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "phasing out", text: "phasing out" }
+        ],
+        correctKey: "score",
+        explanationEn: "'Score' functions as a verb meaning to gain, earn, or make a goal or point in a competitive athletic match.",
+        explanationAm: "‘Score’ ማለት ግብ ማስቆጠር ወይም በውድድሩ ወሳኝ ነጥብ ማግኘት ማለት ነው።"
+      },
+      {
+        id: 10,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "A tired runner who was subbed off the field took a rest on the substitute ____________________ while watching the second half.",
+        options: [
+          { key: "tie", text: "tie" },
+          { key: "score", text: "score" },
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "bench", text: "bench" },
+          { key: "decorate", text: "decorate" },
+          { key: "phasing out", text: "phasing out" }
+        ],
+        correctKey: "bench",
+        explanationEn: "In team sports terminology, the 'bench' is the designated seating area reserved for substitute players and resting athletes.",
+        explanationAm: "‘Bench’ በስፖርት ጨዋታዎች ወቅት ተጠባባቂ ወይም ያረፉ ተጫዋቾች የሚቀመጡበት ረጅም ወንበር ወይም መቀመጫ ነው።"
+      },
+      {
+        id: 11,
+        part: "PART II: CONTEXTUAL FILL-IN-THE-BLANK",
+        type: "fill_blank",
+        prompt: "When the whistle blew at the end of regulation time, the contest was locked in a dead heat, concluding in a 2-2 ____________________.",
+        options: [
+          { key: "phasing out", text: "phasing out" },
+          { key: "eucalyptus", text: "eucalyptus" },
+          { key: "bench", text: "bench" },
+          { key: "decorate", text: "decorate" },
+          { key: "score", text: "score" },
+          { key: "tie", text: "tie" }
+        ],
+        correctKey: "tie",
+        explanationEn: "A 'tie' (or draw) is a sports result in which both opposing competitors finish with an equal score or points (such as 2-2).",
+        explanationAm: "‘Tie’ ማለት አቻ ውጤት፣ እኩል ነጥብ ወይም ሁለቱም ተወዳዳሪዎች በእኩል ውጤት የሚያጠናቅቁበት ሁኔታ ነው።"
+      },
+
+      /* PART III: CONTEXTUAL MULTIPLE CHOICE (Items 12 to 26) */
+      /* Note: Correct answer keys are deliberately varied and unpatterned */
+      {
+        id: 12,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Because Genna is a celebrated Ethiopian game, hundreds of cheering spectators gathered on the open field to witness the annual holiday competition. What does the word 'popular' describe in this situation?",
+        options: [
+          { key: "A", text: "A pastime that is widely known, celebrated, and liked by many people" },
+          { key: "B", text: "An activity played strictly in secret without any witnesses" },
+          { key: "C", text: "A boring routine that participants want to avoid" },
+          { key: "D", text: "A fragile wooden stick that easily breaks during play" }
+        ],
+        correctKey: "A",
+        explanationEn: "'Popular' signifies something widely admired, well-known, accepted, and loved by the broader public.",
+        explanationAm: "‘Popular’ ማለት በብዙ ሰዎች ዘንድ የታወቀ፣ የተወደደ እና በስፋት የሚደነቅ ማለት ነው።"
+      },
+      {
+        id: 13,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "During a strategic round of Gebeta, a skilled player calculated every move in order to ________ all of the seeds remaining in the opponent's hole.",
+        options: [
+          { key: "A", text: "decorate" },
+          { key: "B", text: "capture" },
+          { key: "C", text: "phase out" },
+          { key: "D", text: "tie" }
+        ],
+        correctKey: "B",
+        explanationEn: "'Capture' means to take control, seize, or acquire counters/seeds from an opponent's pits in board games.",
+        explanationAm: "‘Capture’ በገበጣ ጨዋታ ላይ የተጋጣሚን ጠጠሮች ወይም ፍሬዎች መማረክ ወይም መውሰድ ማለት ነው።"
+      },
+      {
+        id: 14,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Abebe Bikila became a ________ athlete whose legendary marathon victories brought great distinction and honor to the entire nation.",
+        options: [
+          { key: "A", text: "hidden" },
+          { key: "B", text: "stealthy" },
+          { key: "C", text: "prominent" },
+          { key: "D", text: "substitute" }
+        ],
+        correctKey: "C",
+        explanationEn: "'Prominent' describes someone distinguished, famous, eminent, and globally respected for their achievements.",
+        explanationAm: "‘Prominent’ ማለት ታዋቂ፣ ስመ-ገናና እና በስራው የላቀ ክብርን ያገኘ ሰው ማለት ነው።"
+      },
+      {
+        id: 15,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "After running faster than anyone in regional competition history, the dedicated athlete ________ the 800-meter school record.",
+        options: [
+          { key: "A", text: "sowed" },
+          { key: "B", text: "broke" },
+          { key: "C", text: "decorated" },
+          { key: "D", text: "tied" }
+        ],
+        correctKey: "B",
+        explanationEn: "In athletic records, 'broke' signifies outdoing, surpassing, or establishing a new faster time.",
+        explanationAm: "‘Broke’ በስፖርት ውስጥ ሪከርድ መስበር ወይም ከዚህ ቀደም የተመዘገበን ፈጣን ውጤት ማሻሻል ማለት ነው።"
+      },
+      {
+        id: 16,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Children across rural communities genuinely ________ gathering in open meadows after school to play lively cultural games together.",
+        options: [
+          { key: "A", text: "enjoy" },
+          { key: "B", text: "injure" },
+          { key: "C", text: "dispute" },
+          { key: "D", text: "variance" }
+        ],
+        correctKey: "A",
+        explanationEn: "'Enjoy' means to take delight, satisfaction, or pleasure in participating in recreation.",
+        explanationAm: "‘Enjoy’ ማለት መደሰት፣ መደሰትን ማግኘት ወይም በአንድ ነገር ደስ መሰኘት ማለት ነው።"
+      },
+      {
+        id: 17,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Gebeta and Genna are categorized as ________ games because they represent customary, ancestral cultural heritage passed down across generations.",
+        options: [
+          { key: "A", text: "modern digital" },
+          { key: "B", text: "traditional" },
+          { key: "C", text: "temporary" },
+          { key: "D", text: "experimental" }
+        ],
+        correctKey: "B",
+        explanationEn: "'Traditional' pertains to time-honored practices and long-established customs passed down from ancestors.",
+        explanationAm: "‘Traditional’ ማለት ባህላዊ፣ ከትውልድ ወደ ትውልድ ሲወራረስ የመጣ ቅርስ ማለት ነው።"
+      },
+      {
+        id: 18,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "In the hide-and-seek game Akukulu, the designated ________ covers his or her eyes against a wall while everyone else scurries into hiding.",
+        options: [
+          { key: "A", text: "referee" },
+          { key: "B", text: "bench" },
+          { key: "C", text: "seeker" },
+          { key: "D", text: "opponent" }
+        ],
+        correctKey: "C",
+        explanationEn: "The 'seeker' (ፈላጊ) in Akukulu or hide-and-seek is the player whose role is to look for concealed participants.",
+        explanationAm: "በአኩኩሉ ጨዋታ ውስጥ ‘seeker’ (ፈላጊው) አይኑን ሸፍኖ ሌሎችን ፈልጎ የሚያገኘው ተጫዋች ነው።"
+      },
+      {
+        id: 19,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Dawit squeezed behind a dense cluster of acacia bushes so he would remain completely ________ from sight until the round was declared safe.",
+        options: [
+          { key: "A", text: "hidden" },
+          { key: "B", text: "prominent" },
+          { key: "C", text: "popular" },
+          { key: "D", text: "won" }
+        ],
+        correctKey: "A",
+        explanationEn: "'Hidden' means concealed, placed out of sight, or kept away from discovery.",
+        explanationAm: "‘Hidden’ ማለት የተሰወረ፣ የተደበቀ ወይም ከእይታ ውጭ የሆነ ማለት ነው።"
+      },
+      {
+        id: 20,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "In traditional tag and hide games, a runner who manages to touch home base without getting tagged is officially declared ________.",
+        options: [
+          { key: "A", text: "tied" },
+          { key: "B", text: "phased" },
+          { key: "C", text: "safe" },
+          { key: "D", text: "sown" }
+        ],
+        correctKey: "C",
+        explanationEn: "'Safe' designates that a player has reached the safety zone or goal without being touched or captured.",
+        explanationAm: "‘Safe’ ማለት ከአደጋ ነፃ የሆነ፣ ሳይያዝ ወይም ሳይነካ ግቡን ያሳካ ተጫዋች የሚሰጠው ደረጃ ነው።"
+      },
+      {
+        id: 21,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "In a fast-paced Genna encounter, a player must swing his wooden hockey stick with balance and accurate timing to ________ the small hard ball toward the goal.",
+        options: [
+          { key: "A", text: "sow" },
+          { key: "B", text: "hit" },
+          { key: "C", text: "hide" },
+          { key: "D", text: "tie" }
+        ],
+        correctKey: "B",
+        explanationEn: "'Hit' means to strike or propel an object forcefully with a stick or implement.",
+        explanationAm: "‘Hit’ ማለት መምታት ወይም ኳሱን በገና ዱላ ወደ ግብ እንዲሄድ መምታት ማለት ነው።"
+      },
+      {
+        id: 22,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "The energetic school championship culminated in an exhilarating final ________ that pitted the two best village teams against one another.",
+        options: [
+          { key: "A", text: "match" },
+          { key: "B", text: "bench" },
+          { key: "C", text: "variance" },
+          { key: "D", text: "equipment" }
+        ],
+        correctKey: "A",
+        explanationEn: "A 'match' is a structured game or athletic competition between two opposing teams or individuals.",
+        explanationAm: "‘Match’ ማለት ግጥሚያ፣ የጨዋታ ውድድር ወይም በሁለት ቡድኖች መካከል የሚደረግ ፍልሚያ ነው።"
+      },
+      {
+        id: 23,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Through outstanding teamwork and continuous offensive pressure, the highland squad triumphed and ________ the golden trophy.",
+        options: [
+          { key: "A", text: "broke" },
+          { key: "B", text: "captured" },
+          { key: "C", text: "won" },
+          { key: "D", text: "sowed" }
+        ],
+        correctKey: "C",
+        explanationEn: "'Won' is the past tense of win, indicating ultimate victory, triumph, or earning a prize in a tournament.",
+        explanationAm: "‘Won’ ማሸነፍ፣ ድል መቀዳጀት ወይም ዋንጫውን በድል መውሰድ ማለት ነው።"
+      },
+      {
+        id: 24,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Sticks, leather balls, carved boards, and counting counters are all essential items of ________ required to organize and play traditional sports.",
+        options: [
+          { key: "A", text: "variance" },
+          { key: "B", text: "equipment" },
+          { key: "C", text: "decorations" },
+          { key: "D", text: "seekers" }
+        ],
+        correctKey: "B",
+        explanationEn: "All physical items like balls, sticks, and boards needed for a game constitute sporting 'equipment'.",
+        explanationAm: "እንደ ዱላ፣ ኳስ፣ የገበጣ ሰሌዳ የመሳሰሉት ጨዋታውን ለማካሄድ የሚያስፈልጉ ‘equipment’ (ቁሳቁሶች) ናቸው።"
+      },
+      {
+        id: 25,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "Before making an offensive move, the clever player carefully watched his ________ across the wooden board to anticipate his challenger's strategy.",
+        options: [
+          { key: "A", text: "equipment" },
+          { key: "B", text: "variance" },
+          { key: "C", text: "opponent" },
+          { key: "D", text: "bench" }
+        ],
+        correctKey: "C",
+        explanationEn: "An 'opponent' is the rival player seated across the table or playing on the other side.",
+        explanationAm: "‘Opponent’ ማለት ተፎካካሪ ወይም ፊት ለፊት የተቀመጠው ተጋጣሚ ተጫዋች ማለት ነው።"
+      },
+      {
+        id: 26,
+        part: "PART III: CONTEXTUAL MULTIPLE CHOICE",
+        type: "multiple_choice",
+        prompt: "The clever player crept ________ across the shadows behind the barn, moving without a whisper of sound to sneak safely to the goal.",
+        options: [
+          { key: "A", text: "stealthily" },
+          { key: "B", text: "prominently" },
+          { key: "C", text: "widely" },
+          { key: "D", text: "equally" }
+        ],
+        correctKey: "A",
+        explanationEn: "'Stealthily' describes moving without noise, quietly and cautiously, so nobody notices or catches the player.",
+        explanationAm: "‘Stealthily’ ማለት በጸጥታና በድብቅ፣ ድምጽ ሳያሰሙ በጥንቃቄ መጓዝ ማለት ነው።"
+      }
+    ];
+
+    /* =========================================================================
+       APP STATE
+       ========================================================================= */
+    let currentStudent = {
+      name: "",
+      id: ""
+    };
+    let currentIndex = 0;
+    let studentAnswers = {}; // { questionId: { selectedKey: "A", isCorrect: true, isAnswered: true } }
+    let startTime = null;
+    let endTime = null;
+    let isSpeechEnabled = true;
+    let britishVoice = null;
+
+    /* =========================================================================
+       SPEECH SYNTHESIS NARRATOR SETUP (British Accent Female)
+       ========================================================================= */
+    function initSpeechNarrator() {
+      if ('speechSynthesis' in window) {
+        function selectVoice() {
+          const voices = window.speechSynthesis.getVoices();
+          // Look for British English voices
+          britishVoice = voices.find(v => (v.lang === 'en-GB' || v.lang === 'en_GB') && (v.name.includes('Female') || v.name.includes('Google UK English Female') || v.name.includes('Hazel') || v.name.includes('Victoria') || v.name.includes('Libby') || v.name.includes('Sonia') || v.name.includes('Natural')));
+          
+          // Fallback to any en-GB voice
+          if (!britishVoice) {
+            britishVoice = voices.find(v => v.lang === 'en-GB' || v.lang === 'en_GB');
+          }
+          // Fallback to generic English
+          if (!britishVoice) {
+            britishVoice = voices.find(v => v.lang.startsWith('en'));
+          }
+        }
+
+        selectVoice();
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = selectVoice;
+        }
+      }
+    }
+
+    function speakText(text) {
+      if (!isSpeechEnabled || !('speechSynthesis' in window)) return;
+      try {
+        window.speechSynthesis.cancel(); // Cancel ongoing speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        if (britishVoice) {
+          utterance.voice = britishVoice;
+        }
+        utterance.lang = 'en-GB';
+        utterance.rate = 0.95; // Clear instructional pace
+        utterance.pitch = 1.05; // Friendly feminine pitch
+        window.speechSynthesis.speak(utterance);
+      } catch (err) {
+        console.debug("TTS Notice:", err);
+      }
+    }
+
+    function toggleSpeechMute() {
+      isSpeechEnabled = !isSpeechEnabled;
+      const icon = document.getElementById("audio-icon");
+      const label = document.getElementById("audio-status-label");
+      if (isSpeechEnabled) {
+        icon.className = "fa-solid fa-volume-high text-emerald-600";
+        label.textContent = "Voice: British (Active)";
+        repeatCurrentPrompt();
+      } else {
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        icon.className = "fa-solid fa-volume-xmark text-slate-400";
+        label.textContent = "Voice: Muted";
+      }
+    }
+
+    function repeatCurrentPrompt() {
+      const q = QUIZ_DATA[currentIndex];
+      if (q) {
+        const textToRead = `Question ${q.id}. ${q.prompt}`;
+        speakText(textToRead);
+      }
+    }
+
+    /* =========================================================================
+       QUIZ FLOW & LOGIC
+       ========================================================================= */
+
+    function handleStartQuiz(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById("student-name").value.trim();
+      const idInput = document.getElementById("student-id").value.trim();
+
+      if (!nameInput || !idInput) return;
+
+      currentStudent.name = nameInput;
+      currentStudent.id = idInput;
+      startTime = new Date();
+
+      // UI Switch
+      document.getElementById("registration-screen").classList.add("hidden");
+      document.getElementById("quiz-screen").classList.remove("hidden");
+      document.getElementById("candidate-badge-name").textContent = currentStudent.name;
+
+      renderQuickPalette();
+      loadQuestion(0);
+    }
+
+    function loadQuestion(index) {
+      currentIndex = index;
+      const q = QUIZ_DATA[currentIndex];
+      const answerState = studentAnswers[q.id];
+
+      // Update Header & Tags
+      document.getElementById("progress-question-label").textContent = `Question ${currentIndex + 1} of ${QUIZ_DATA.length}`;
+      const percentage = Math.round(((currentIndex + 1) / QUIZ_DATA.length) * 100);
+      document.getElementById("progress-percentage-label").textContent = `${percentage}%`;
+      document.getElementById("progress-bar-fill").style.width = `${percentage}%`;
+
+      document.getElementById("part-tag").textContent = q.part;
+      document.getElementById("question-text").textContent = `${q.id}. ${q.prompt}`;
+
+      // Set Subtext based on item category
+      const subtextElem = document.getElementById("question-subtext");
+      if (q.type === "matching") {
+        subtextElem.textContent = "Click the button with the correct corresponding definition (irreversible choice).";
+      } else if (q.type === "fill_blank") {
+        subtextElem.textContent = "Interactive Word Bank: Click the word that naturally fits the sentence.";
+      } else {
+        subtextElem.textContent = "Read the context carefully and select the best multiple-choice option.";
+      }
+
+      // Render Options
+      const optionsContainer = document.getElementById("options-container");
+      optionsContainer.innerHTML = "";
+
+      // For Word Bank (fill in the blank), render a neat button grid
+      if (q.type === "fill_blank") {
+        const gridDiv = document.createElement("div");
+        gridDiv.className = "grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1";
+
+        q.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.id = `opt-btn-${opt.key.replace(/\s+/g, '-')}`;
+          btn.className = getOptionButtonBaseClass(q, opt.key, answerState, true);
+          btn.innerHTML = `
+            <span class="font-bold text-sm tracking-wide">${opt.text}</span>
+          `;
+          btn.onclick = () => selectAnswer(opt.key);
+          if (answerState) btn.disabled = true;
+          gridDiv.appendChild(btn);
+        });
+        optionsContainer.appendChild(gridDiv);
+      } else {
+        // Matching & Multiple Choice List
+        q.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.id = `opt-btn-${opt.key}`;
+          btn.className = getOptionButtonBaseClass(q, opt.key, answerState, false);
+          btn.onclick = () => selectAnswer(opt.key);
+          if (answerState) btn.disabled = true;
+
+          btn.innerHTML = `
+            <div class="flex items-center space-x-3 w-full text-left">
+              <span class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 ${getBadgeStyle(q, opt.key, answerState)}">
+                ${opt.key}
+              </span>
+              <span class="text-sm font-medium text-slate-800 flex-1 leading-snug">${opt.text}</span>
+              <span class="status-marker text-sm font-bold flex-shrink-0">
+                ${getMarkerIcon(q, opt.key, answerState)}
+              </span>
+            </div>
+          `;
+          optionsContainer.appendChild(btn);
+        });
+      }
+
+      // Update Explanation Container
+      const explContainer = document.getElementById("explanation-container");
+      if (answerState) {
+        showExplanationView(q, answerState);
+      } else {
+        explContainer.classList.add("hidden");
+      }
+
+      // Update Navigation Buttons
+      document.getElementById("prev-btn").disabled = (currentIndex === 0);
+      
+      const isLast = (currentIndex === QUIZ_DATA.length - 1);
+      const nextBtnText = document.getElementById("next-btn-text");
+      const nextBtnIcon = document.getElementById("next-btn-icon");
+
+      if (isLast) {
+        nextBtnText.textContent = "Finish & Submit Quiz";
+        nextBtnIcon.className = "fa-solid fa-flag-checkered";
+      } else {
+        nextBtnText.textContent = "Next Question";
+        nextBtnIcon.className = "fa-solid fa-arrow-right";
+      }
+
+      updatePaletteSelection();
+      updateScoreCounter();
+
+      // Read aloud prompt in British accent
+      if (!answerState) {
+        speakText(`Question ${q.id}. ${q.prompt}`);
+      }
+    }
+
+    function getOptionButtonBaseClass(question, optionKey, answerState, isGrid) {
+      const base = isGrid 
+        ? "p-3 rounded-xl border text-center btn-transition font-medium cursor-pointer "
+        : "w-full p-3.5 rounded-xl border text-left btn-transition cursor-pointer ";
+
+      if (!answerState) {
+        return base + "bg-white border-slate-200 hover:border-emerald-500 hover:bg-emerald-50/40 text-slate-800 shadow-xs";
+      }
+
+      // Irreversible answer already locked in
+      if (optionKey === question.correctKey) {
+        return base + "bg-emerald-50 border-emerald-500 text-emerald-950 ring-2 ring-emerald-500/30";
+      }
+
+      if (answerState.selectedKey === optionKey && !answerState.isCorrect) {
+        return base + "bg-rose-50 border-rose-500 text-rose-950 ring-2 ring-rose-500/30";
+      }
+
+      return base + "bg-slate-50 border-slate-200 text-slate-400 opacity-60 cursor-not-allowed";
+    }
+
+    function getBadgeStyle(question, optionKey, answerState) {
+      if (!answerState) {
+        return "bg-slate-100 text-slate-600 border border-slate-200";
+      }
+      if (optionKey === question.correctKey) {
+        return "bg-emerald-600 text-white";
+      }
+      if (answerState.selectedKey === optionKey && !answerState.isCorrect) {
+        return "bg-rose-600 text-white";
+      }
+      return "bg-slate-200 text-slate-400";
+    }
+
+    function getMarkerIcon(question, optionKey, answerState) {
+      if (!answerState) return "";
+      if (optionKey === question.correctKey) {
+        return `<i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>`;
+      }
+      if (answerState.selectedKey === optionKey && !answerState.isCorrect) {
+        return `<i class="fa-solid fa-circle-xmark text-rose-600 text-base"></i>`;
+      }
+      return "";
+    }
+
+    /* =========================================================================
+       INSTANT FEEDBACK & AUTO-GRADING
+       ========================================================================= */
+    function selectAnswer(selectedKey) {
+      const q = QUIZ_DATA[currentIndex];
+      // Irreversible rule: If already answered, do not allow changing
+      if (studentAnswers[q.id]) return;
+
+      const isCorrect = (selectedKey === q.correctKey);
+      studentAnswers[q.id] = {
+        questionId: q.id,
+        selectedKey: selectedKey,
+        isCorrect: isCorrect,
+        isAnswered: true
+      };
+
+      // Voice commentary
+      if (isCorrect) {
+        speakText("Brilliant! That is correct.");
+      } else {
+        speakText(`Incorrect. The correct answer is: ${q.correctKey}.`);
+      }
+
+      // Re-render the current question to immediately lock inputs and display colors
+      loadQuestion(currentIndex);
+    }
+
+    function showExplanationView(question, answerState) {
+      const container = document.getElementById("explanation-container");
+      const header = document.getElementById("feedback-header");
+      const icon = document.getElementById("feedback-icon");
+      const title = document.getElementById("feedback-title");
+      const enText = document.getElementById("explanation-en");
+      const amText = document.getElementById("explanation-am");
+
+      container.classList.remove("hidden");
+
+      if (answerState.isCorrect) {
+        container.className = "mt-6 border border-emerald-300 bg-emerald-50/50 rounded-xl p-4 sm:p-5 transition-all";
+        header.className = "flex items-center space-x-2.5 font-bold text-emerald-800 mb-2";
+        icon.className = "w-6 h-6 rounded-full bg-emerald-600 flex items-center justify-center text-white text-xs";
+        icon.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        title.textContent = "Excellent! Correct Answer.";
+      } else {
+        container.className = "mt-6 border border-rose-300 bg-rose-50/50 rounded-xl p-4 sm:p-5 transition-all";
+        header.className = "flex items-center space-x-2.5 font-bold text-rose-800 mb-2";
+        icon.className = "w-6 h-6 rounded-full bg-rose-600 flex items-center justify-center text-white text-xs";
+        icon.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+        title.textContent = `Incorrect Choice (Correct: ${question.correctKey})`;
+      }
+
+      enText.textContent = question.explanationEn;
+      amText.textContent = question.explanationAm;
+    }
+
+    function updateScoreCounter() {
+      let score = 0;
+      Object.values(studentAnswers).forEach(ans => {
+        if (ans.isCorrect) score++;
+      });
+      document.getElementById("live-score-display").textContent = `${score} / ${QUIZ_DATA.length}`;
+    }
+
+    /* =========================================================================
+       NAVIGATION BUTTONS
+       ========================================================================= */
+    function goToPrevQuestion() {
+      if (currentIndex > 0) {
+        loadQuestion(currentIndex - 1);
+      }
+    }
+
+    function skipCurrentQuestion() {
+      if (currentIndex < QUIZ_DATA.length - 1) {
+        loadQuestion(currentIndex + 1);
+      } else {
+        submitQuizConfirmation();
+      }
+    }
+
+    function goToNextQuestion() {
+      if (currentIndex < QUIZ_DATA.length - 1) {
+        loadQuestion(currentIndex + 1);
+      } else {
+        submitQuizConfirmation();
+      }
+    }
+
+    function jumpToQuestion(index) {
+      loadQuestion(index);
+    }
+
+    /* =========================================================================
+       QUICK PALETTE (26 QUESTIONS)
+       ========================================================================= */
+    function renderQuickPalette() {
+      const palette = document.getElementById("palette-container");
+      palette.innerHTML = "";
+
+      QUIZ_DATA.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.id = `palette-btn-${q.id}`;
+        btn.type = "button";
+        btn.className = "h-8 rounded-lg font-bold text-xs flex items-center justify-center transition border border-slate-200";
+        btn.textContent = q.id;
+        btn.onclick = () => jumpToQuestion(idx);
+        palette.appendChild(btn);
+      });
+      updatePaletteSelection();
+    }
+
+    function updatePaletteSelection() {
+      QUIZ_DATA.forEach((q, idx) => {
+        const btn = document.getElementById(`palette-btn-${q.id}`);
+        if (!btn) return;
+
+        const isCurrent = (idx === currentIndex);
+        const ans = studentAnswers[q.id];
+
+        if (ans) {
+          if (ans.isCorrect) {
+            btn.className = "h-8 rounded-lg font-bold text-xs flex items-center justify-center transition bg-emerald-600 text-white border-emerald-600";
+          } else {
+            btn.className = "h-8 rounded-lg font-bold text-xs flex items-center justify-center transition bg-rose-500 text-white border-rose-500";
+          }
+        } else {
+          btn.className = "h-8 rounded-lg font-bold text-xs flex items-center justify-center transition bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200";
+        }
+
+        if (isCurrent) {
+          btn.classList.add("ring-2", "ring-indigo-500", "ring-offset-1");
+        }
+      });
+    }
+
+    /* =========================================================================
+       FINAL SUBMISSION & TEACHER DASHBOARD
+       ========================================================================= */
+    function submitQuizConfirmation() {
+      const totalAnswered = Object.keys(studentAnswers).length;
+      const totalQuestions = QUIZ_DATA.length;
+
+      if (totalAnswered < totalQuestions) {
+        const unansweredCount = totalQuestions - totalAnswered;
+        const confirmSkip = confirm(`You have ${unansweredCount} unanswered question(s). Do you wish to complete and submit now?`);
+        if (!confirmSkip) return;
+      }
+
+      finishQuizAndShowResults();
+    }
+
+    function finishQuizAndShowResults() {
+      endTime = new Date();
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+
+      // Calculate Scores
+      let finalScore = 0;
+      QUIZ_DATA.forEach(q => {
+        const ans = studentAnswers[q.id];
+        if (ans && ans.isCorrect) {
+          finalScore++;
+        }
+      });
+
+      const percentage = Math.round((finalScore / QUIZ_DATA.length) * 100);
+      const timeDiffSeconds = Math.floor((endTime - startTime) / 1000);
+      const minutes = Math.floor(timeDiffSeconds / 60);
+      const seconds = timeDiffSeconds % 60;
+      const timeSpentString = `${minutes}m ${seconds}s`;
+
+      let gradeStatus = "Needs Revision";
+      if (percentage >= 85) gradeStatus = "Mastery Level (A+)";
+      else if (percentage >= 70) gradeStatus = "Proficient (B)";
+      else if (percentage >= 50) gradeStatus = "Satisfactory (C)";
+
+      // Update Screen Elements
+      document.getElementById("res-score").textContent = `${finalScore} / ${QUIZ_DATA.length}`;
+      document.getElementById("res-percentage").textContent = `${percentage}%`;
+      document.getElementById("res-grade-status").textContent = gradeStatus;
+      document.getElementById("res-time-spent").textContent = timeSpentString;
+
+      document.getElementById("res-student-name").textContent = currentStudent.name;
+      document.getElementById("res-student-id").textContent = currentStudent.id;
+      document.getElementById("res-timestamp").textContent = endTime.toLocaleString();
+
+      // Configure Email Link to Teacher: mesayferedegn2@gmail.com
+      setupEmailLink(finalScore, percentage, gradeStatus, timeSpentString);
+
+      // Render Item-by-Item Breakdown
+      renderAnswersBreakdown();
+
+      // Transition views
+      document.getElementById("quiz-screen").classList.add("hidden");
+      document.getElementById("results-screen").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Voice announcement
+      speakText(`Assessment completed. Well done ${currentStudent.name}. You scored ${finalScore} out of 26.`);
+    }
+
+    function setupEmailLink(finalScore, percentage, gradeStatus, timeSpent) {
+      const teacherEmail = "mesayferedegn2@gmail.com";
+      const subject = encodeURIComponent(`Assessment Results: Grade 6 English Unit 1 - ${currentStudent.name} (${currentStudent.id})`);
+      
+      let bodyText = `OFFICIAL ASSESSMENT REPORT\n`;
+      bodyText += `====================================\n`;
+      bodyText += `Subject: Grade 6 English - Unit 1: Traditional Games\n`;
+      bodyText += `Student Name: ${currentStudent.name}\n`;
+      bodyText += `Student ID: ${currentStudent.id}\n`;
+      bodyText += `Submission Date: ${endTime.toLocaleString()}\n`;
+      bodyText += `Time Expended: ${timeSpent}\n\n`;
+      bodyText += `FINAL GRADE METRICS:\n`;
+      bodyText += `Score: ${finalScore} / 26\n`;
+      bodyText += `Accuracy: ${percentage}%\n`;
+      bodyText += `Evaluation: ${gradeStatus}\n`;
+      bodyText += `====================================\n\n`;
+      bodyText += `DETAILED ITEM AUDIT:\n`;
+
+      QUIZ_DATA.forEach(q => {
+        const a = studentAnswers[q.id];
+        const status = (a && a.isCorrect) ? "CORRECT" : "INCORRECT";
+        const chosen = a ? a.selectedKey : "UNANSWERED";
+        bodyText += `Q${q.id} [${status}]: Student answered '${chosen}', Key was '${q.correctKey}'\n`;
+      });
+
+      bodyText += `\nVerified by Interactive Assessment Portal.`;
+
+      const mailtoUrl = `mailto:${teacherEmail}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+      document.getElementById("email-teacher-link").href = mailtoUrl;
+
+      // Store report plain text for clipboard copy
+      window.latestReportText = bodyText;
+    }
+
+    function renderAnswersBreakdown() {
+      const container = document.getElementById("answers-breakdown-list");
+      container.innerHTML = "";
+
+      QUIZ_DATA.forEach(q => {
+        const a = studentAnswers[q.id];
+        const isCorrect = a ? a.isCorrect : false;
+        const selected = a ? a.selectedKey : "No response";
+
+        const card = document.createElement("div");
+        card.className = `p-3.5 rounded-xl border text-xs sm:text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${
+          isCorrect ? "bg-emerald-50/70 border-emerald-200" : "bg-rose-50/70 border-rose-200"
+        }`;
+
+        card.innerHTML = `
+          <div class="space-y-1">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">Item ${q.id}</span>
+              <span class="text-slate-400">•</span>
+              <span class="text-slate-700 font-medium">${q.prompt.substring(0, 75)}...</span>
+            </div>
+            <div class="text-xs text-slate-600">
+              Your response: <strong class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">${selected}</strong> | 
+              Correct answer: <strong class="text-emerald-700">${q.correctKey}</strong>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 flex-shrink-0">
+            <span class="px-2 py-0.5 rounded text-[11px] font-bold ${
+              isCorrect ? "bg-emerald-200 text-emerald-900" : "bg-rose-200 text-rose-900"
+            }">
+              ${isCorrect ? "+1 Mark" : "0 Marks"}
+            </span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function copyScoreReportToClipboard() {
+      if (!window.latestReportText) return;
+      
+      const textArea = document.createElement("textarea");
+      textArea.value = window.latestReportText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        const notif = document.getElementById("copy-confirmation");
+        notif.classList.remove("hidden");
+        document.getElementById("copy-report-btn-text").textContent = "Copied to Clipboard!";
+        setTimeout(() => {
+          notif.classList.add("hidden");
+          document.getElementById("copy-report-btn-text").textContent = "Copy Full Score Report";
+        }, 3500);
+      } catch (err) {
+        console.error("Copy failed", err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function restartQuiz() {
+      studentAnswers = {};
+      currentIndex = 0;
+      startTime = null;
+      endTime = null;
+      document.getElementById("results-screen").classList.add("hidden");
+      document.getElementById("registration-screen").classList.remove("hidden");
+    }
+
+    // Initialize narrator voice when window loads
+    window.onload = function() {
+      initSpeechNarrator();
+    };
+  </script>
+</body>
+</html>
